@@ -1,56 +1,87 @@
-**Judge Scoreboard System**
-This is a lightweight PHP-based web application to facilitate real-time score submissions by judges and display a live scoreboard for participants.
+#  Judge Scoreboard System
 
-## Setup Instructions
+This is a lightweight PHP-based web application that allows judges to submit scores in real-time and displays a live scoreboard for participants. Built with simplicity and clarity in mind, this app is ideal for small competitions or events.
 
-1. **Install LAMP Stack** using XAMPP or native (Linux).
-2. **Clone or Download this repository to your XAMPP htdocs folder:
-      https://github.com/isaacbill/Scoreboard-System.git
+---
+
+##  Setup Instructions
+
+### 1. Requirements
+
+- **PHP** (v7.4+)
+- **MySQL or MariaDB**
+- **LAMP Stack** (Use **XAMPP** for convenience on Linux or install components natively)
+- A modern web browser
+
+### 2. Installation
+
+1. **Clone or Download** this repository to your XAMPP `htdocs` folder:
+
+   ```
+   https://github.com/isaacbill/Scoreboard-System.git
+   ```
+
+2. **Start Apache and MySQL** from the XAMPP control panel.
+
 3. **Create the Database**:
-   - Start Apache and MySQL from the XAMPP control panel.
-   - Create a new database:
-      CREATE DATABASE scoreboard;
-    -Import the SQL schema below (from /init/scoreboard.sql)
-     - Add some `users` (participants) manually
-    -Update Database Credentials in includes/db.php:
 
-4. **Access the App via browser:**
-    Admin Panel: http://localhost/lamp-scoreboard/admin/add_judge.php
-    
-    Judge Panel: http://localhost/lamp-scoreboard/judge/index.php
-    
-    Scoreboard: http://localhost/lamp-scoreboard/public/scoreboard.php
+   - Open **phpMyAdmin** or use the MySQL CLI.
+   - Create a database:
 
-5. **Assumptions Made**
--Each judge can score each participant once per submission.
+     ```sql
+     CREATE DATABASE scoreboard;
+     ```
 
--No login/authentication mechanism is implemented.
+   - Import the schema:
 
--Judges are added manually through an admin-like panel.
+     ```
+     /init/scoreboard.sql
+     ```
 
--Judges score participants from 1 to 100 points.
+   - Add some users (participants) manually.
 
- 6. **Design Choices**
--MySQL + PHP (MySQLi): Lightweight stack suitable for local deployment and small apps.
+4. **Update Database Credentials** in:
 
--Database Normalization: Kept entities (judges, users, scores) normalized for clarity and flexibility.
+   ```
+   includes/db.php
+   ```
 
--AJAX-based Scoreboard: For real-time updates without refreshing the page.
+5. **Access the App in your browser**:
 
--Separation of Concerns: Each PHP file serves a clear role (e.g., submit_score.php, scores_ajax.php).
+   - **Admin Panel**: http://localhost/lamp-scoreboard/admin/add_judge.php
+   - **Judge Panel**: http://localhost/lamp-scoreboard/judge/index.php
+   - **Scoreboard**: http://localhost/lamp-scoreboard/public/scoreboard.php
 
-7 **Future Features**
+---
 
--User Authentication & Role Management
-Implement login functionality for judges and admins with role-based permissions (e.g., only admins can add judges or manage scores).
+##  Assumptions Made
 
--Editable Scores & Audit Trail
-Allow judges or admins to edit or delete submitted scores, and maintain a history of changes for transparency.
+- Each judge can score each participant only once.
+- No login or authentication is implemented.
+- Judges are added manually through the admin panel.
+- Scores range from **1 to 100**.
 
--Multi-Round/Event Support
-Add support for multiple events or competition rounds, with separate scoring and leaderboards for each.
+---
 
--Responsive & Mobile-Friendly UI
-Improve the frontend design to be fully responsive for mobile and tablet users, ensuring accessibility during live events.
+##  Design Choices
 
+- **MySQL + PHP (MySQLi)**: A lightweight stack ideal for small local deployments.
+- **Normalized Database Structure**: Clear separation of entities (`judges`, `users`, `scores`) for maintainability.
+- **AJAX-Based Scoreboard**: Enables real-time updates without reloading the page.
+- **Separation of Concerns**: Each PHP script has a single responsibility (e.g., `submit_score.php`, `scores_ajax.php`).
 
+---
+
+##  Future Features
+
+1. **User Authentication & Role Management**  
+   Implement login functionality with roles (e.g., judges, admins). Admins manage judges and view all scores.
+
+2. **Editable Scores & Audit Trail**  
+   Allow edits to scores with an audit log to track changes and ensure transparency.
+
+3. **Multi-Round/Event Support**  
+   Add support for multiple competition rounds or events with isolated leaderboards.
+
+4. **Responsive & Mobile-Friendly UI**  
+   Upgrade the frontend to be fully responsive and user-friendly on all devices.
